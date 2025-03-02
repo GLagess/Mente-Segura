@@ -1,0 +1,6 @@
+torch
+ollama
+pymupdf
+transformers
+sentence-transformers
+PyPDF2
