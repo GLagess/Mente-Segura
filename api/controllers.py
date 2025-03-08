@@ -1,35 +1,36 @@
 from flask import request, jsonify
 from flask_restful import Resource
+from IA.chatbot import chat_with_llama
+
+# Variáveis de memória para protótipo
+conversation_history = []
+vault_content = []
+vault_embeddings = []
 
 class ChatbotResource(Resource):
-    def get(self):
-        """
-        Endpoint para testar a API
-        ---
-        responses:
-          200:
-            description: API está rodando corretamente.
-        """
-        return jsonify({"message": "API do chatbot está rodando!"})
-
     def post(self):
         """
-        Enviar mensagem para o chatbot
+        Enviar mensagem para a IA e receber resposta
         ---
         parameters:
-          - name: message
+          - name: pergunta
             in: body
-            type: string
             required: true
-            description: Mensagem do usuário para o chatbot
+            schema:
+              type: object
+              properties:
+                pergunta:
+                  type: string
         responses:
           200:
-            description: Resposta do chatbot
+            description: Resposta da IA
         """
         data = request.get_json()
-        user_message = data.get("message", "")
+        pergunta = data.get("pergunta")
 
-        # Simulação de resposta do chatbot (IA será integrada depois)
-        chatbot_response = f"Você disse: {user_message}"
+        if not pergunta:
+            return jsonify({"erro": "A pergunta não pode estar vazia!"})
 
-        return jsonify({"user_message": user_message, "chatbot_response": chatbot_response})
+        # Chama a função da IA
+        resposta = chat_with_llama(pergunta, vault_embeddings, vault_content, conversation_history)
+        return jsonify({"resposta": resposta})

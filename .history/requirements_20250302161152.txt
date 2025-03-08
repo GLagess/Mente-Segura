@@ -1,9 +1,0 @@
-torch
-ollama
-pymupdf
-transformers
-sentence-transformers
-PyPDF2
-flask 
-flask-restful 
-flasgger
