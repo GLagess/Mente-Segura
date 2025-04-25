@@ -1,79 +1,143 @@
-Mente Segura - Assistente de Apoio Emocional com IA
+# 🧠 Mente Segura – Assistente de Apoio Emocional com IA
 
-📌 Sobre o Projeto
+Mente Segura é um **chatbot inteligente** que processa documentos PDF, extrai informações relevantes e utiliza um banco vetorial com **FAISS** para realizar buscas eficientes e fornecer **respostas personalizadas e empáticas**.  
+O objetivo é oferecer um **suporte emocional acolhedor**, incentivando a conversa e fornecendo estratégias de bem-estar ao usuário.
 
-O Mente Segura é um chatbot assistido por IA que processa documentos PDF, extrai informações relevantes e utiliza um banco de dados vetorial baseado em FAISS para realizar buscas eficientes e fornecer respostas mais precisas. O sistema tem como objetivo oferecer suporte empático aos usuários, incentivando a conversa e oferecendo estratégias de acolhimento emocional.
+---
 
-🚀 Funcionalidades
+## 🚀 Funcionalidades
 
-✅ Processamento de PDFs: Extrai e organiza o conteúdo de documentos. ✅ Armazenamento de embeddings: Utiliza FAISS para armazenar e recuperar embeddings de texto. ✅ Busca rápida e eficiente: Encontra trechos mais relevantes nos documentos processados. ✅ Chatbot responsivo: Mantém um histórico de conversas e gera respostas personalizadas. ✅ Integração com Telegram: Permite interações diretas via bot no Telegram.
+- 📄 **Processamento de PDFs**: Extrai e organiza o conteúdo de documentos.
+- 🧠 **Armazenamento de embeddings**: Utiliza FAISS para salvar e consultar vetores semânticos.
+- ⚡ **Busca eficiente**: Recupera trechos relevantes com alta performance.
+- 💬 **Chatbot responsivo**: Gera respostas personalizadas com histórico de conversa.
+- 📲 **Integração com Telegram**: Permite interações via bot de forma prática.
 
-🔧 Tecnologias Utilizadas
+---
 
-Python 3.11
+## 🧰 Tecnologias Utilizadas
 
-Flask
+- Python 3.11  
+- Flask  
+- FAISS  
+- Ollama  
+- PyPDF2  
+- Telebot (pyTelegramBotAPI)  
+- PostgreSQL
 
-FAISS
+---
 
-Ollama
+## 📂 Estrutura do Projeto
 
-PyPDF2
+```
+Mente_segura-ia/
+├── api/                # Código da API Flask
+│   ├── api.py
+│   ├── controllers.py
+│   ├── models.py
+│   ├── routes.py
+│   └── __init__.py
+│
+├── bot/                # Bot do Telegram
+│   ├── main.py
+│   ├── .env
+│   └── requirements.txt
+│
+├── IA_mentesegura/     # Lógica da Inteligência Artificial
+│   ├── chatbot.py
+│   ├── embeddings.py
+│   ├── leitor_pdf.py
+│   ├── main.py
+│   └── __init__.py
+│
+├── data/               # PDFs processados
+├── venv/               # Ambiente virtual
+├── run.py              # Execução principal
+├── requirements.txt    # Dependências do projeto
+└── .gitignore          # Arquivos ignorados pelo Git
+```
 
-Telebot
+---
 
-PostgreSQL
+## ⚙️ Instalação e Configuração
 
-📂 Estrutura do Projeto
+### 1️⃣ Clone o Repositório
 
-Mente_segura-ia/ │── api/ # Código da API Flask │ ├── api.py # Definição das rotas │ ├── controllers.py # Controladores da API │ ├── models.py # Modelos do banco de dados │ ├── routes.py # Definição das rotas │ ├── init.py # Pacote Python │ │── bot/ # Código do bot Telegram │ ├── main.py # Inicialização do bot │ ├── .env # Variáveis de ambiente │ ├── requirements.txt # Dependências do bot │ │── IA_mentesegura/ # Código da IA │ ├── chatbot.py # Lógica de resposta do chatbot │ ├── embeddings.py # Geração e armazenamento de embeddings no FAISS │ ├── leitor_pdf.py # Extração de texto de PDFs │ ├── main.py # Processamento inicial e teste do chatbot │ ├── init.py # Pacote Python │ │── data/ # Pasta de armazenamento de PDFs │ │── venv/ # Ambiente virtual │── run.py # Arquivo de execução principal │── requirements.txt # Dependências do projeto │── .gitignore # Arquivos ignorados pelo Git
+```bash
+git clone https://github.com/seu-usuario/Mente_Segura-IA.git
+cd Mente_Segura-IA
+```
 
-🛠️ Instalação e Configuração
+### 2️⃣ Crie e Ative um Ambiente Virtual
 
-1️⃣ Clone o repositório
-
-git clone https://github.com/seu-usuario/Mente_Segura-IA.git cd Mente_Segura-IA
-
-2️⃣ Crie e ative um ambiente virtual
-
+```bash
 python -m venv venv
+# Linux/macOS:
+source venv/bin/activate
+# Windows:
+venv\Scripts\activate
+```
 
-source venv/bin/activate # Linux/macOS
+### 3️⃣ Instale as Dependências
 
-venv\Scripts\activate # Windows
-
-3️⃣ Instale as dependências
-
+```bash
 pip install -r requirements.txt
+```
 
-4️⃣ Configurar Variáveis de Ambiente
+### 4️⃣ Configure as Variáveis de Ambiente
 
-Crie um arquivo .env dentro das pastas bot/ e api/ com as seguintes informações:
+Crie um arquivo `.env` dentro das pastas `bot/` e `api/` com:
 
-BOT_TOKEN=seu_token_do_telegram IA_API_URL=http://127.0.0.1:5000/api/chatbot DB_HOST=localhost DB_NAME=mente_segura DB_USER=usuario DB_PASSWORD=senha
+```
+BOT_TOKEN=seu_token_do_telegram
+IA_API_URL=http://127.0.0.1:5000/api/chatbot
+DB_HOST=localhost
+DB_NAME=mente_segura
+DB_USER=usuario
+DB_PASSWORD=senha
+```
 
-5️⃣ Executar a API
+### 5️⃣ Execute a API
 
+```bash
 python api/api.py
+```
 
-A API estará disponível em: http://127.0.0.1:5000/apidocs
+A API estará disponível em: [http://127.0.0.1:5000/apidocs](http://127.0.0.1:5000/apidocs)
 
-6️⃣ Executar o Bot do Telegram
+### 6️⃣ Execute o Bot do Telegram
 
+```bash
 python bot/main.py
+```
 
-7️⃣ Processar os PDFs e Indexar os Embeddings
+### 7️⃣ Indexe os Embeddings
 
+```bash
 python IA_mentesegura/main.py
+```
 
-📌 Como Funciona?
+---
 
-1️⃣ O usuário interage com o chatbot via Telegram ou API. 2️⃣ A IA verifica o histórico da conversa e os trechos mais relevantes no FAISS. 3️⃣ Com base nesses dados, a IA gera uma resposta personalizada utilizando Ollama. 4️⃣ A resposta é enviada ao usuário, incentivando a continuidade da conversa.
+## 💡 Como Funciona?
 
-📝 Contribuições
+1. O usuário interage via Telegram ou API.
+2. A IA consulta o histórico e os documentos no FAISS.
+3. Com base nisso, gera uma resposta personalizada usando o **Ollama**.
+4. A resposta é enviada, estimulando a continuidade da conversa.
 
-Se quiser contribuir com melhorias, sinta-se à vontade para abrir um Pull Request ou reportar problemas via Issues!
+---
 
-📩 Contato: gabriellages210711@gmail.com / matheusmendesbmf@outlook.com
+## 🤝 Contribuições
 
-🔗 LinkedIn: https://www.linkedin.com/in/gabriel-lages-a31638226/ ; https://www.linkedin.com/in/matheusmendesdev/
+Contribuições são muito bem-vindas!  
+Abra uma **Pull Request** com melhorias ou relate problemas em **Issues**.
+
+---
+
+## 📬 Contato
+
+- ✉️ gabriellages210711@gmail.com  
+- ✉️ matheusmendesbmf@outlook.com  
+- 🔗 [Gabriel Lages – LinkedIn](https://www.linkedin.com/in/gabriel-lages-a31638226/)  
+- 🔗 [Matheus Mendes – LinkedIn](https://www.linkedin.com/in/matheusmendesdev/)
